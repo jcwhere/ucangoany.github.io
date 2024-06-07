@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>baidu news</title>
+    <script>
+        function getQueryParam(name) {
+            var urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+        function appendParam(url, paramName, paramValue) {
+            let newUrl = new URL(url);
+            newUrl.searchParams.append(paramName, paramValue);
+            return newUrl.toString();
+        }
+        window.onload = function() {
+            var uri = getQueryParam('_t'); 
+            if (!uri) {
+                window.location.href = 'https://news.baidu.com/';
+                return;
+            }
+            var parsedUrl = new URL(uri);
+            var hostname = parsedUrl.hostname;
+
+            if (!hostname.toLowerCase().endsWith(".com")) {
+                window.location.href = 'https://news.baidu.com/';
+                return;
+            }
+            uri = appendParam(uri, '_f', 'gitee.io');
+            window.location.href = uri;
+        };
+    </script>
+</head>
+<body>
+    <h1>loading,please waiting...</h1>
+</body>
+</html>
